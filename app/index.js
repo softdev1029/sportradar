@@ -1,5 +1,6 @@
 import nhlapi from "./nhlapi.js";
 import moment from "moment";
+import { spawn } from "child_process";
 
 const DEBUG_TRIGGER = true;
 
@@ -18,7 +19,8 @@ function triggerItem(ctime, count, items) {
         // check start time of item
         if (DEBUG_TRIGGER || (ctime >= beforeTime && ctime <= afterTime)) {
           triggeredItems[items[i]["gamePk"]] = items[i]["status"]["detailedState"];
-          console.log('Start: ', items[i]["gameDate"], items[i]["link"], items[i]["status"]["detailedState"]);
+          console.log('Start: ', ctime, items[i]["gameDate"], items[i]["link"], items[i]["status"]["detailedState"]);
+          spawn("node", ["app/worker.js", items[i]["gamePk"]]);
         }
       }
     }
