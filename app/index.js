@@ -1,4 +1,3 @@
-import database from "./database.js";
 import nhlapi from "./nhlapi.js";
 import moment from "moment";
 
@@ -39,22 +38,15 @@ function getNHLSchedule() {
     const currentTime = resp["metaData"]["timeStamp"];
     const dates = resp["dates"];
     for (const dateItem of dates) {
-      const date = dateItem["date"];
-  
-      triggerItem(currentTime, dateItem["totalEvents"], dateItem["events"]);
       triggerItem(currentTime, dateItem["totalGames"], dateItem["games"]);
+
+      /* TODO: process events and matches
+      triggerItem(currentTime, dateItem["totalEvents"], dateItem["events"]);
       triggerItem(currentTime, dateItem["totalMatches"], dateItem["matches"]);
+      */
     }
   });
 }
-
-database.get((rows) => {
-  //console.log('Game is: ', rows);
-});
-
-console.log("XXXXXX", process.argv[0]);
-console.log("XXXXXX", process.argv[1]);
-console.log("XXXXXX", process.argv[2]);
 
 // get schedule
 while (true) {
