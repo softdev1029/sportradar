@@ -5,6 +5,7 @@ const DEBUG_WORKER = true;
 
 let item_id;
 let game_created = false;
+let checked_play = 0;
 const teams = {};
 
 function getOpponnetTeam(team_id) {
@@ -20,6 +21,7 @@ function getOpponnetTeam(team_id) {
 function processGameData(gameData) {
   // check if game is finaled.
   if (!DEBUG_WORKER && gameData["status"]["detailedState"] == "Final") {
+    database.disConnect();
     process.exit();
   }
   // create game
@@ -56,6 +58,30 @@ function processGameData(gameData) {
 }
 
 function processLiveData(liveData) {
+  // process live data
+  if (game_created) {
+    const allPlays = liveData["plays"]["allPlays"];
+    if (allPlays) {
+      for (; checked_play < allPlays.length; checked_play ++) {
+        const play = allPlays[checked_play];
+        const players = play["players"];
+        if (players) {
+          console.log(checked_play, play["result"]["eventTypeId"], play["result"]["description"]);
+          switch (play["result"]["eventTypeId"]) {
+            case "GOAL":
+            case "HIT":
+              for (let i = 0; i < players.length; i ++) {
+                database.increaseCount(item_id, players[i]["player"]["id"], players[i]["playerType"]);
+              }
+            break;
+
+            default:
+            break;
+          }
+        }
+      }
+    }
+  }
 }
 
 function getFeedLive() {

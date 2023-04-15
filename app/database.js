@@ -28,6 +28,21 @@ function get(ret) {
   });
 };
 
+function increaseCount(game_id, player_id, field) {
+  let sql = "UPDATE `player_game` SET FIELD = FIELD + 1 WHERE `game_id` like ? and `player_id` like ?"
+  if (field == "Scorer") {
+    sql = sql.replaceAll("FIELD", "goals");
+  } else if (field == "Assist") {
+    sql = sql.replaceAll("FIELD", "assists");
+  } else if (field == "Hitter") {
+    sql = sql.replaceAll("FIELD", "hits");
+  } else {
+    return;
+  }
+  connection.query(sql, [game_id, player_id], () => {
+  });
+};
+
 function createGame(data, ret) {
   let sql = "INSERT INTO `game`(`game_id`, `away_team_name`, `home_team_name`) VALUES (?, ?, ?)"
   connection.query(sql, data, (error, result) => {
@@ -77,6 +92,7 @@ function createPlayers(data, ret) {
 const database = {
   connect,
   disConnect,
+  increaseCount,
   createGame,
   createPlayers,
   get
