@@ -16,7 +16,7 @@ function triggerItem(ctime, count, items) {
         const beforeTime = moment(startTime).add(-10, 's').format("YYYYMMDD_HHmmss");
   
         // check start time of item
-        if (DEBUG_TRIGGER || (ctime >= beforeTime && !triggeredItems[items[i]["gamePk"]]) {
+        if (DEBUG_TRIGGER || (ctime >= beforeTime && !triggeredItems[items[i]["gamePk"]])) {
           triggeredItems[items[i]["gamePk"]] = items[i]["status"]["detailedState"];
           // trigger worker
           spawn("node", ["app/worker.js", items[i]["gamePk"]]);

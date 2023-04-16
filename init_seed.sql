@@ -1,28 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 4.9.5deb2
--- https://www.phpmyadmin.net/
---
--- Host: localhost:3306
--- Generation Time: Apr 16, 2023 at 12:04 PM
--- Server version: 8.0.32-0ubuntu0.20.04.2
--- PHP Version: 7.4.3-4ubuntu2.18
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `game`
---
+CREATE DATABASE IF NOT EXISTS sportradar;
+USE sportradar;
 
 CREATE TABLE `game` (
   `game_id` int NOT NULL,
@@ -30,34 +7,14 @@ CREATE TABLE `game` (
   `home_team_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `start_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `end_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `game`
---
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `game` (`game_id`, `away_team_name`, `home_team_name`, `start_time`, `end_time`) VALUES
 (2022020320, 'Colorado Avalanche', 'Nashville Predators', '2023-04-15 03:00:00', '2023-04-15 05:31:46');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `game`
---
 ALTER TABLE `game`
   ADD PRIMARY KEY (`game_id`);
 COMMIT;
---
--- Database: `sportradar-advanced-challenge`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `player_game`
---
 
 CREATE TABLE `player_game` (
   `game_id` int NOT NULL,
@@ -74,11 +31,7 @@ CREATE TABLE `player_game` (
   `points` int DEFAULT '0',
   `penalty_minutes` int DEFAULT '0',
   `opponnet_team` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `player_game`
---
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `player_game` (`game_id`, `player_id`, `player_name`, `team_id`, `team_name`, `player_age`, `player_number`, `player_position`, `assists`, `goals`, `hits`, `points`, `penalty_minutes`, `opponnet_team`) VALUES
 (2022020320, 8471677, 'Jack Johnson', 21, 'Colorado Avalanche', 36, '3', 'D', 0, 0, 4, 0, 0, 'Nashville Predators'),
@@ -132,17 +85,6 @@ INSERT INTO `player_game` (`game_id`, `player_id`, `player_name`, `team_id`, `te
 (2022020320, 8483570, 'Ben Meyers', 21, 'Colorado Avalanche', 24, '59', 'C', 0, 0, 0, 0, 0, 'Nashville Predators'),
 (2022020320, 8484256, 'Jake Livingstone', 18, 'Nashville Predators', 24, '23', 'D', 0, 0, 1, 0, 0, 'Colorado Avalanche');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `player_game`
---
 ALTER TABLE `player_game`
   ADD PRIMARY KEY (`game_id`,`player_id`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

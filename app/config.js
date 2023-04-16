@@ -1,10 +1,10 @@
 const config = {
   mysql: {
-    host: "192.168.10.4",
+    host: "localhost",
     port: 3306,
-    username: "game",
-    password: "game",
-    database: "sportradar-advanced-challenge",
+    username: "root",
+    password: "password",
+    database: "sportradar",
   },
 };
 

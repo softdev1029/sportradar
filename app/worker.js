@@ -1,7 +1,7 @@
 import nhlapi from "./nhlapi.js";
 import database from "./database.js";
 
-const DEBUG_WORKER = false;
+const DEBUG_WORKER = true;
 
 let item_id;
 let game_created = false;
