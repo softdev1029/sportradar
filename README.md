@@ -22,20 +22,32 @@ But if you're an expert, you won't have a problem.
 
 
 ### setup mysql
+
 - install mysql
+
 `sudo apt install mysql-server`
+
+
 - create database and user for this program
+
 Go to mysql shell and do the following.
+
 `CREATE DATABASE sportradar;`
+
 `CREATE USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'password';`
+
 `GRANT PRIVILEGE ON sportradar.% TO 'root'@'%';`
+
 Now, you can import init seed sql to your database.
+
 `mysql -u root -ppassword sportradar < init_seed.sql`
 
 ### setup program
 If you successfully install and setup mysql, then you can run this program.
 Please do the following.
+
 `npm install`
+
 `npm start`
 
 Now you can get NHL data.
