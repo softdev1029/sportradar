@@ -7,7 +7,7 @@ You can execute this program in many ways.
 All instructions below must be executed within this registry cloned from GitHub.
 
 ## 1. Docker
-If you know docker, then docker and docker-composer will be in your environment.
+If you know docker, then docker and docker-compose will be in your environment.
 This program support docker-compose.
 
 `docker-compose -f docker-compose.yaml up`
