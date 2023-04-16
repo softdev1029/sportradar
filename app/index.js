@@ -2,7 +2,7 @@ import nhlapi from "./nhlapi.js";
 import moment from "moment";
 import { spawn } from "child_process";
 
-const DEBUG_TRIGGER = true;
+const DEBUG_TRIGGER = false;
 
 let triggeredItems = {};
 
@@ -14,13 +14,13 @@ function triggerItem(ctime, count, items) {
       if (!triggeredItems[items[i]["gamePk"]]) {
         const startTime = new Date(items[i]["gameDate"]);
         const beforeTime = moment(startTime).add(-10, 's').format("YYYYMMDD_HHmmss");
-        const afterTime = moment(startTime).add(10, 's').format("YYYYMMDD_HHmmss");
   
         // check start time of item
-        if (DEBUG_TRIGGER || (ctime >= beforeTime && ctime <= afterTime)) {
+        if (DEBUG_TRIGGER || (ctime >= beforeTime && !triggeredItems[items[i]["gamePk"]]) {
           triggeredItems[items[i]["gamePk"]] = items[i]["status"]["detailedState"];
-          console.log('Start: ', ctime, items[i]["gameDate"], items[i]["link"], items[i]["status"]["detailedState"]);
+          // trigger worker
           spawn("node", ["app/worker.js", items[i]["gamePk"]]);
+          console.log('Start: ', ctime, items[i]["gameDate"], items[i]["link"], items[i]["status"]["detailedState"]);
         }
       }
     }
