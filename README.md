@@ -50,4 +50,4 @@ Please do the following.
 
 `npm start`
 
-Now you can get NHL data.
+Now you can get sportradar-advanced-challenge data.
