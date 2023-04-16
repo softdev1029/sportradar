@@ -5,6 +5,8 @@ const DEBUG_WORKER = true;
 
 let item_id;
 let game_created = false;
+let game_updated_start = false;
+let game_updated_end = false;
 let checked_play = 0;
 const teams = {};
 
@@ -54,6 +56,23 @@ function processGameData(gameData) {
         game_created = true;
       });
     });
+  }
+  // update game time
+  if (game_created) {
+    if (gameData["datetime"]) {
+      if (!game_updated_start) {
+        if (gameData["datetime"]["dateTime"]) {
+          database.updateGameTime(true, item_id, gameData["datetime"]["dateTime"]);
+          game_updated_start = true;
+        }
+      }
+      if (!game_updated_end) {
+        if (gameData["datetime"]["endDateTime"]) {
+          database.updateGameTime(false, item_id, gameData["datetime"]["endDateTime"]);
+          game_updated_end = true;
+        }
+      }
+    }
   }
 }
 

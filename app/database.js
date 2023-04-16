@@ -17,17 +17,6 @@ function disConnect() {
   connection.end();
 };
 
-function get(ret) {
-  let sql = "SELECT * from game";
-  connection.query(sql, (error, rows) => {
-    if (error) {
-      console.error(error);
-    } else {
-      ret(rows);
-    }
-  });
-};
-
 function increaseCount(game_id, player_id, field) {
   let sql = "UPDATE `player_game` SET FIELD = FIELD + 1 WHERE `game_id` like ? and `player_id` like ?"
   if (field == "Scorer") {
@@ -55,6 +44,18 @@ function createGame(data, ret) {
     } else {
       ret(result);
     }
+  });
+};
+
+function updateGameTime(start, game_id, time) {
+  let sql = "UPDATE `game` SET FIELD = ? WHERE `game_id` like ?"
+  let date = new Date(time);
+  if (start) {
+    sql = sql.replaceAll("FIELD", "start_time");
+  } else {
+    sql = sql.replaceAll("FIELD", "end_time");
+  }
+  connection.query(sql, [date, game_id], (error, result) => {
   });
 };
 
@@ -94,8 +95,8 @@ const database = {
   disConnect,
   increaseCount,
   createGame,
+  updateGameTime,
   createPlayers,
-  get
 };
 
 export default database;
