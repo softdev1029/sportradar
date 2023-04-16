@@ -36,7 +36,7 @@ Go to mysql shell and do the following.
 
 `CREATE USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'password';`
 
-`GRANT PRIVILEGE ON sportradar.% TO 'root'@'%';`
+`GRANT ALL PRIVILEGES ON sportradar.* TO 'root'@'%';;`
 
 Now, you can import init seed sql to your database.
 
