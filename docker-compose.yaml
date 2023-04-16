@@ -1,0 +1,29 @@
+version: '1.0'
+
+services:
+  ingest:
+    image: node:18.0
+    command: bash -c "apt-get update && apt-get install default-mysql-client --yes && cd /ingest && npm install && npm start"
+    networks:
+      - sportradar_net
+    depends_on:
+      - ingest_db
+    volumes:
+      - .:/ingest
+      - ./docker/config.js:/ingest/app/config.js
+
+  ingest_db:
+    image: mysql:5.7
+    platform: linux/amd64
+    networks:
+      - sportradar_net
+    ports:
+      - "3306:3306"
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./init_seed.sql:/data/application/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+
+networks:
+  sportradar_net:
