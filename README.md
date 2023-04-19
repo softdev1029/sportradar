@@ -6,7 +6,17 @@ This program is based node.js+mysql.
 You can execute this program in many ways.
 All instructions below must be executed within this registry cloned from GitHub.
 
-## 1. Docker
+## file structure
+
+```
+: config.js - configuration file such as database configuration
+: database.js - all database functions such as connect/disconnect, CRUD operations
+: index.js - the main module running the 1st process (continually watch for game status changes and toggle the next process on game status changes)
+: worker.js - the module running the 2nd process (run when games are live and close when games are over. This process will ingest game data from the NHL)
+: nhlapi.js - the API integration
+```
+
+## Docker
 
 If you know docker, then docker and docker-compose will be in your environment.
 This program support docker-compose.
@@ -29,7 +39,7 @@ As you know, if docker-compose is successful, then you can go into the docker sh
 
 ![image](https://user-images.githubusercontent.com/43288800/232275073-079c5fe9-a28d-46ed-bcea-f47022add61a.png)
 
-## 2. Manually
+## Manual Setup
 
 This can be a bit complicated if you want to install it manually.
 But if you're an expert, you won't have a problem.
