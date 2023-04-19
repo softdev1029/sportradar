@@ -7,26 +7,38 @@ You can execute this program in many ways.
 All instructions below must be executed within this registry cloned from GitHub.
 
 ## 1. Docker
+
 If you know docker, then docker and docker-compose will be in your environment.
 This program support docker-compose.
 
 `docker-compose -f docker-compose.yaml up`
+
+If you face the following error, please use `version: '2.2'` or a proper version instead of 1.0.
+
+```
+ERROR: Version in "./docker-compose.yaml" is invalid. You might be seeing this error because you're using the wrong Compose file version. Either specify a supported version (e.g "2.2" or "3.3") and place your service definitions under the `services` key, or omit the `version` key and place your service definitions at the root of the file to use version 1.
+```
+
+If you face the mysql port conflict issue, please use other port instead of the default 3306.
+
+```
+Error starting userland proxy: listen tcp4 0.0.0.0:3306: bind: address already in use
+```
 
 As you know, if docker-compose is successful, then you can go into the docker shell and get your needs.
 
 ![image](https://user-images.githubusercontent.com/43288800/232275073-079c5fe9-a28d-46ed-bcea-f47022add61a.png)
 
 ## 2. Manually
+
 This can be a bit complicated if you want to install it manually.
 But if you're an expert, you won't have a problem.
-
 
 ### setup mysql
 
 - install mysql
 
 `sudo apt install mysql-server`
-
 
 - create database and user for this program
 
@@ -43,6 +55,7 @@ Now, you can import init seed sql to your database.
 `mysql -u root -ppassword sportradar < init_seed.sql`
 
 ### setup program
+
 If you successfully install and setup mysql, then you can run this program.
 Please do the following.
 
