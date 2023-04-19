@@ -14,6 +14,7 @@ All instructions below must be executed within this registry cloned from GitHub.
 : index.js - the main module running the 1st process (continually watch for game status changes and toggle the next process on game status changes)
 : worker.js - the module running the 2nd process (run when games are live and close when games are over. This process will ingest game data from the NHL)
 : nhlapi.js - the API integration
+: *.test.js - the Test files
 ```
 
 ## Docker
