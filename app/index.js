@@ -50,6 +50,10 @@ function triggerItem(ctime, count, items) {
 function getNHLSchedule() {
   // get and analyze schedule data
   nhlapi.getSchedule((resp) => {
+    if (!resp) {
+      console.log ("Getting schedule data failed.");
+      return;
+    }
     const currentTime = resp["metaData"]["timeStamp"];
     const dates = resp["dates"];
     for (const dateItem of dates) {

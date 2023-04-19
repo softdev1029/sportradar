@@ -10,9 +10,12 @@ async function getBase(ret, path) {
     const response = await req.json();
     if (req.status == 200) {
       ret(response);
+    } else {
+      ret(null);
     }
   } catch (err) {
     console.log(err);
+    ret(null);
   }
 }
 

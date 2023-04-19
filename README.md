@@ -75,7 +75,12 @@ Please do the following.
 
 Now you can get sportradar-advanced-challenge data.
 
+You can test the functions of app is working correctly.
+
+`npm test`
+
 ## Database Design Principle
+
 I used 2 tables: `game` and `player_game`.
 I used the concept of `Database Denormalization` in which I added redundant data to these 2 tables.
 This can help us avoid costly joins in a relational database.

@@ -106,6 +106,10 @@ function processLiveData(liveData) {
 function getFeedLive() {
   // get and analyze feed live
   nhlapi.getFeedLive(item_id, (resp) => {
+    if (!resp) {
+      console.log ("Getting feed data failed.");
+      return;
+    }
     processGameData(resp["gameData"]);
     processLiveData(resp["liveData"]);
   });
