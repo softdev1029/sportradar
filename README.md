@@ -74,3 +74,13 @@ Please do the following.
 `npm start`
 
 Now you can get sportradar-advanced-challenge data.
+
+## Database Design Principle
+I used 2 tables: `game` and `player_game`.
+I used the concept of `Database Denormalization` in which I added redundant data to these 2 tables.
+This can help us avoid costly joins in a relational database.
+For example, we can think of a 3rd table `player`.
+But the most data of the player is related to a particular game such as `player_number`, `player_position` and so on.
+If we don't want the duplicated `player_name` column in the table `player_game`, we can use a new table `player`. But it needs the JOIN operation.
+all columns of the table `game` are quite independent when comparing with the info of the player.
+So, I made the table `game`.
